@@ -181,3 +181,35 @@ Den = function(raschObj, theta){ ## function to calculate the denominator of the
 Num(testRasch, 5) ## test
 Den(testRasch, 5) ## test
 
+IntNum = integrate(Num, raschObj = testRasch, lower = -6, upper = 6) ## test integral over theta using the Num function from earlier holding testRasch constant from -6 to 6
+as.numeric(IntNum) ## shows that it's stored as a list
+str(IntNum) ## shows list items
+IntNum = IntNum$value ## isolates the value
+
+IntDen = integrate(Den, raschObj = testRasch, lower = -6, upper = 6) ## test integral over theta using the Den function from earlier holding testRasch constant from -6 to 6
+IntDen = IntDen$value ## isolates the value
+
+IntNum/IntDen ## divides the test numerator integral by the test denominator integral
+########################################
+
+EAP = function(raschObj, lower = -6, upper = 6){ ## creates function for EAP value which takes a Rasch object as the input and holds -6 to 6 as the boundaries
+  Top = integrate(Num, raschObj = raschObj, lower = -6, upper = 6) ## integration function for the numerator over theta using Num 
+  Top = Top$value ## separates out just the value of the integration
+  Bottom = integrate(Den, raschObj = raschObj, lower = -6, upper = 6) ## integration function for the denominator over theta using Den
+  Bottom = Bottom$value ## separates out just the value of the integration
+  return(Top/Bottom) ## returns the numerator value divided by the denominator value
+}
+
+########################################
+EAP(testRasch) ## test
+########################################
+
+setMethod("print", signature(x = "raschObj"), ## sets method for print function which already has a generic with input x where x must be a Rasch object
+          function(x){ ## defines this function as taking the EAP of the input x and returning a list of the name slot of the Rasch object and the EAP value
+            EAP = EAP(x, lower = -6, upper = 6)
+            return(list(x@name, "EAP" = EAP))
+          })
+
+########################################
+print(testRasch) ## test
+
