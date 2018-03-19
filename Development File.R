@@ -101,5 +101,36 @@ dataframe$PQ = ifelse(dataframe$y == 1, dataframe$testP, dataframe$testQ) ## if 
 dataframe
 ########################################
 
+Prob = function(raschObj, theta){ ## function to calculate probability of student getting the question right P and also Q of them getting it wrong
+  P = P(theta, raschObj@a) ## calls P function from earlier
+  Q = 1-P ## defines Q as 1-P
+  y = raschObj@y ## defines y input as a separate vector y
+  matrix = cbind(P, Q, y) ## creates a matrix with 3 columns with values P, Q, and Y
+  dataframe = as.data.frame(matrix) ## turns the matrix into a dataframe
+  dataframe$PQ = ifelse(dataframe$y == 1, dataframe$P, dataframe$Q) ## creates new column PQ which contains P if the corresponding y value is 1 (the student got the question correct) and Q if y is zero (the student got the question wrong)
+  final = dataframe ## names the dataframe final
+  final$y = NULL ## removes column y for clean output purposes
+  final$Q = NULL ## removes column Q for clean output purposes
+  return(final) ## returns the edited dataframe with only P and PQ labeled accordingly
+}
 
+########################################
+testRasch = newRasch("Jacob", c(2,5,2,5,7), c(1,1,0,1,0)) ## sample Rasch
+testP = P(5, testRasch@a) ## sample P using Rasch
+testP
+testQ = 1-testP ## sample Q
+testQ
+testMatrix = cbind(testP, testQ, testRasch@y) ## sample matrix using Rasch
+testMatrix ## test - determined that matrix needed to be called with a separate value vector y created from the Rasch object or the column will not be labeled
+testDataframe = as.data.frame(testMatrix) ## sample data frame with Rasch
+testDataframe
+colnames(testDataframe) = c("testP", "testQ", "testy") ## experimenting with naming
+colnames(testDataframe)
+print(testDataframe)
+testDataframe$testPQ = ifelse(testDataframe$testy == 1, testDataframe$testP, testDataframe$testQ) ## new sample PQ
+testDataframe$testPQ
+testvectPQ = as.vector(testDataframe$testPQ) ## turns column PQ into its own vector
+prod(testvectPQ) ## takes product of vector inputs
 
+Prob(testRasch, 5)
+########################################
