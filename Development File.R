@@ -63,6 +63,15 @@ checkValidityRasch = function(object){ ## feeds checkLength and checkY into vali
 setValidity("Rasch", checkValidityRasch) ## sets checkValidityRasch as the constraints for an object to be of class Rasch
 
 ########################################
+checkValidityRasch(newRasch("Jacob", c(2,5,2,5,7), c(1,0,1,1,1))) ## test for error
+
+checkValidityRasch(newRasch("Jacob", c(2,5,2,5,7), c(3,4,6,7,2))) ## test for error
+
+newRasch("Jacob", c(2,5,2,5,7), c(3,4,6,7)) ## test for error
+
+newRasch("Jacob", c(2,5,2,5,7), c(0,0,0,1,0)) ## test for working
+########################################
+
 
 
 
