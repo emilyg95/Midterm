@@ -101,7 +101,7 @@ dataframe$PQ = ifelse(dataframe$y == 1, dataframe$testP, dataframe$testQ) ## if 
 dataframe
 ########################################
 
-Prob = function(raschObj, theta){ ## function to calculate probability of student getting the question right P and also Q of them getting it wrong
+Prob = function(raschObj, theta){ ## function to calculate probability of student getting the question right P and also Q of them getting it wrong - takes inputs of a Rasch object and theta as specified in the question
   P = P(theta, raschObj@a) ## calls P function from earlier
   Q = 1-P ## defines Q as 1-P
   y = raschObj@y ## defines y input as a separate vector y
@@ -133,4 +133,22 @@ testvectPQ = as.vector(testDataframe$testPQ) ## turns column PQ into its own vec
 prod(testvectPQ) ## takes product of vector inputs
 
 Prob(testRasch, 5)
+########################################
+
+Like = function(raschObj, theta){ ## Likelihood function that calculates likelihood of proposed theta - takes inputs of a Rasch object and theta as specified in the question 
+  Prob = Prob(raschObj, theta) ## calls probability function from earlier
+  PQ = as.vector(Prob$PQ) ## separates column PQ from Prob output and makes it its own vector
+  return(prod(PQ)) ## returns the product of the vector
+}
+
+########################################
+Like(testRasch, 5) ## test
+
+testRasch2 = newRasch("Jacob", c(2,5,2,5,7), c(1,1,1,1,1)) ## new sample student who got every answer right
+
+Like(testRasch2, 100) ## test
+
+testRasch3 = newRasch("Jacob", c(12,2,3,23,2), c(1,1,1,1,0))
+
+Like(testRasch3, 18)
 ########################################
