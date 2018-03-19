@@ -53,7 +53,16 @@ checkY(newRasch("Jacob", c(2,5,2,5,7), c(3,4,6,7,8))) ## test for error
 checkY(newRasch("Jacob", c(2,5,2,5,7), c(0,0,0,1,1))) ## test for working
 ########################################
 
+checkValidityRasch = function(object){ ## feeds checkLength and checkY into validity function for Rasch
+  if (checkLength(object) != TRUE | checkY(object) != TRUE){ ## returns an error message if the test does not pass
+    return("object is not a valid value")}
+  else{
+    return(TRUE)}
+}
 
+setValidity("Rasch", checkValidityRasch) ## sets checkValidityRasch as the constraints for an object to be of class Rasch
+
+########################################
 
 
 
