@@ -212,4 +212,16 @@ setMethod("print", signature(x = "raschObj"), ## sets method for print function 
 
 ########################################
 print(testRasch) ## test
+########################################
+
+## package development tools
+install.packages("devtools")
+install.packages("roxygen2")
+
+library(devtools)
+library(roxygen2)
+
+setwd("/Users/emilygarner/Documents/School/Second Sem/R/Problem Sets/Midterm") ## sets wd to where I want my easyRasch package located
+
+devtools::create("easyRasch") ## creates the structure for my package
 
