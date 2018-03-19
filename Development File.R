@@ -152,3 +152,11 @@ testRasch3 = newRasch("Jacob", c(12,2,3,23,2), c(1,1,1,1,0))
 
 Like(testRasch3, 18)
 ########################################
+
+Prior = function(theta){ ## creates function to calculate height of normal curve for proposed theta - takes input of theta as specified in the question
+  return(dnorm(theta, mean = 0, sd = 3)) ## returns a normal curve with x = theta a mean of 0 and standard deviation of 3
+}
+
+########################################
+Prior(5) ## test
+########################################
