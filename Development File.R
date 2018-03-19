@@ -72,6 +72,34 @@ newRasch("Jacob", c(2,5,2,5,7), c(3,4,6,7)) ## test for error
 newRasch("Jacob", c(2,5,2,5,7), c(0,0,0,1,0)) ## test for working
 ########################################
 
+P = function(theta, a){ ## function to calculate the probability of a student getting a question right - takes inputs theta and a as specified in the instructions
+  top = exp(theta-a) ## creates the numerator of the P equation
+  bottom = 1 + exp(theta-a) ## creates the denominator of the P equation
+  P = top/bottom ## calculates P
+  return(P) ## returns output
+}
+
+########################################
+P(7, 8) ## test for P with a as single value
+P(7, c(3,4,6,7,2)) ## test for P with a as vector
+
+testP = P(7, c(3,4,6,7,2)) ## sample output of P
+testQ = 1-testP ## sample output of Q
+y = c(1,0,0,1,1) ## sample y vector
+
+## development for Probability function
+matrix = cbind(testP, testQ, y) ## playing around with organization - combines P Q and Y into a sample matrix
+matrix
+matrix[1,]
+matrix[,3]
+head.matrix(matrix, 4)
+dataframe = as.data.frame(matrix) ## turns matrix into sample dataframe
+dataframe[,3]
+dataframe$y
+
+dataframe$PQ = ifelse(dataframe$y == 1, dataframe$testP, dataframe$testQ) ## if else statement which creates a new column PQ in the sample dataframe that contains the input from column P if y = 1 and the input from column Q if y = 0
+dataframe
+########################################
 
 
 
