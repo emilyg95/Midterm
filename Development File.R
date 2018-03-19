@@ -160,3 +160,24 @@ Prior = function(theta){ ## creates function to calculate height of normal curve
 ########################################
 Prior(5) ## test
 ########################################
+
+########################################
+
+Num = function(raschObj, theta){ ## function to calculate the numerator of the EAP formula - takes inputs Rasch object and theta as specified by the question
+  Like = Like(raschObj, theta) ## calls like function from earlier
+  Prior = Prior(theta) ## calls prior function from earlier 
+  Num = theta*Like*Prior ## output multiplies like, prior, and theta
+  return(Num) ## returns output
+}
+
+Den = function(raschObj, theta){ ## function to calculate the denominator of the EAP formula - takes inputs Rasch object and theta as specified by the question
+  Like = Like(raschObj, theta) ## calls like function from earlier
+  Prior = Prior(theta) ## calls prior function from earlier 
+  Den = Like*Prior ## output multiplies like and prior
+  return(Den) ## returns output
+}
+
+########################################
+Num(testRasch, 5) ## test
+Den(testRasch, 5) ## test
+
