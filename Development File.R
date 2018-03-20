@@ -168,6 +168,19 @@ Like = function(raschObj, theta){ ## Likelihood function that calculates likelih
   return(prod(PQ)) ## returns the product of the vector
 }
 
+generic = function(raschObj, theta){ ## creates the interior function for set generic
+  standardGeneric("Like")
+}
+
+setGeneric("Like", generic) ## sets generic for Prob function
+
+setMethod("Like", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Prob function for inputs of class Rasch and theta
+          function(raschObj, theta){
+            Prob = Prob(raschObj, theta)
+            PQ = as.vector(Prob$PQ) ## separates column PQ from Prob output and makes it its own vector
+            return(prod(PQ)) ## returns the product of the vector
+          })
+
 ########################################
 Like(testRasch, 5) ## test
 
