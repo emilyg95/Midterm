@@ -14,7 +14,7 @@
 #' @author Emily Garner<\email{emily.garner@@wustl.edu}>
 #' @examples
 #' 
-#' myA <- seq(3,12,3) 
+#' myA <- c(3, 12, 3) 
 #' myY <- c(1, 1, 0) 
 #' newRasch <- ("Emily", myA, myY)
 #' @seealso
