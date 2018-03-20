@@ -114,11 +114,9 @@ Prob = function(raschObj, theta){ ## function to calculate probability of studen
   return(final) ## returns the edited dataframe with only P and PQ labeled accordingly
 }
 
-generic = function(raschObj, theta){ ## creates the interior function for set generic
+setGeneric("Prob", function(raschObj, theta){ ## creates the interior function for set generic
   standardGeneric("Prob")
-}
-
-setGeneric("Prob", generic) ## sets generic for Prob function
+}) ## sets generic for Prob function
 
 setMethod("Prob", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Prob function for inputs of class Rasch and theta
           function(raschObj, theta){
@@ -168,11 +166,9 @@ Like = function(raschObj, theta){ ## Likelihood function that calculates likelih
   return(prod(PQ)) ## returns the product of the vector
 }
 
-generic = function(raschObj, theta){ ## creates the interior function for set generic
+setGeneric("Like", function(raschObj, theta){ ## creates the interior function for set generic
   standardGeneric("Like")
-}
-
-setGeneric("Like", generic) ## sets generic for Prob function
+}) ## sets generic for Prob function
 
 setMethod("Like", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Prob function for inputs of class Rasch and theta
           function(raschObj, theta){
@@ -197,10 +193,17 @@ Prior = function(theta){ ## creates function to calculate height of normal curve
   return(dnorm(theta, mean = 0, sd = 3)) ## returns a normal curve with x = theta a mean of 0 and standard deviation of 3
 }
 
+setGeneric("Prior", function(theta){ ## creates the interior function for set generic
+  standardGeneric("Prior")
+}) ## sets generic for Prob function
+
+setMethod("Prior", signature(theta = "numeric"), ## sets method of Prob function for input of class theta
+          function(theta){
+            return(dnorm(theta, mean = 0, sd = 3))}
+)
+
 ########################################
 Prior(5) ## test
-########################################
-
 ########################################
 
 Num = function(raschObj, theta){ ## function to calculate the numerator of the EAP formula - takes inputs Rasch object and theta as specified by the question
