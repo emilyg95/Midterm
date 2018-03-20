@@ -18,7 +18,7 @@ setGeneric("Prior", function(theta){ ## creates the interior function for set ge
   standardGeneric("Prior")
 }) ## sets generic for Prob function
 
-#' @exportMethod 
+#' @export
 setMethod("Prior", signature(theta = "numeric"), ## sets method of Prob function for input of class theta
           function(theta){
             return(dnorm(theta, mean = 0, sd = 3))}

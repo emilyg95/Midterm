@@ -21,7 +21,7 @@ setGeneric("Prob", function(raschObj, theta){
   standardGeneric("Prob")
 }) ## sets generic for Prob function
 
-#' @exportMethod 
+#' @export
 setMethod("Prob", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Prob function for inputs of class Rasch and theta
           function(raschObj, theta){
             a = raschObj@a ## separates a and defines it as its own value for use in P

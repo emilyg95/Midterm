@@ -39,7 +39,7 @@ Den = function(raschObj, theta){ ## function to calculate the denominator of the
   return(Den) ## returns output
 }
 
-#' @exportMethod 
+#' @export
 setMethod("EAP", signature(raschObj = "Rasch", lower = "numeric", upper = "numeric"), ## sets method of Like function for inputs of class Rasch and theta
           function(raschObj, lower = -6, upper = 6){
             Top = integrate(Num, raschObj = raschObj, lower = -6, upper = 6) ## integration function for the numerator over theta using Num 
@@ -48,4 +48,3 @@ setMethod("EAP", signature(raschObj = "Rasch", lower = "numeric", upper = "numer
             Bottom = Bottom$value ## separates out just the value of the integration
             return(Top/Bottom) ## returns the numerator value divided by the denominator value
           })
-

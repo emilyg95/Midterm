@@ -18,14 +18,8 @@
 #' @include newRasch.R
 #' @include Prob.R
 #' @export
-setGeneric("Like", function(raschObj, theta){ ## creates the interior function for set generic
-  standardGeneric("Like")
+Like = function(raschObj, theta){ ## Likelihood function that calculates likelihood of proposed theta - takes inputs of a Rasch object and theta as specified in the question 
+  Prob = Prob(raschObj, theta) ## calls probability function from earlier
+  PQ = as.vector(Prob$PQ) ## separates column PQ from Prob output and makes it its own vector
+  return(prod(PQ)) ## returns the product of the vector
 }
-
-#' @exportMethod 
-setMethod("Like", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Prob function for inputs of class Rasch and theta
-          function(raschObj, theta){
-            Prob = Prob(raschObj, theta)
-            PQ = as.vector(Prob$PQ) ## separates column PQ from Prob output and makes it its own vector
-            return(prod(PQ)) ## returns the product of the vector
-          })

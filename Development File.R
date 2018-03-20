@@ -281,3 +281,20 @@ setwd("/Users/emilygarner/Documents/School/Second Sem/R/Problem Sets/Midterm") #
 
 devtools::create("easyRasch") ## creates the structure for my package
 
+rm(list=ls(all=TRUE))
+
+current.code <- as.package("easyRasch")
+load_all(current.code)
+document(current.code) ## creating package
+
+testRasch = newRasch("Jacob", c(2,5,2,5,7), c(1,1,0,1,0)) ## sample Rasch
+
+Prob(testRasch, 4)
+
+Like(testRasch, 4)
+
+Prior(4)
+
+EAP(testRasch, lower = -6, upper = -6)
+
+
