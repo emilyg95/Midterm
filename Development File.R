@@ -297,4 +297,5 @@ Prior(4)
 
 EAP(testRasch, lower = -6, upper = -6)
 
+print(testRasch)
 

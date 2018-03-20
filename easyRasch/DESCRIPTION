@@ -13,4 +13,5 @@ Collate:
     'Prob.R'
     'Like.R'
     'EAP.R'
+    'printRasch.R'
 RoxygenNote: 6.0.1
