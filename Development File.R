@@ -168,9 +168,9 @@ Like = function(raschObj, theta){ ## Likelihood function that calculates likelih
 
 setGeneric("Like", function(raschObj, theta){ ## creates the interior function for set generic
   standardGeneric("Like")
-}) ## sets generic for Prob function
+}) ## sets generic for Like function
 
-setMethod("Like", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Prob function for inputs of class Rasch and theta
+setMethod("Like", signature(raschObj = "Rasch", theta = "numeric"), ## sets method of Like function for inputs of class Rasch and theta
           function(raschObj, theta){
             Prob = Prob(raschObj, theta)
             PQ = as.vector(Prob$PQ) ## separates column PQ from Prob output and makes it its own vector
@@ -195,9 +195,9 @@ Prior = function(theta){ ## creates function to calculate height of normal curve
 
 setGeneric("Prior", function(theta){ ## creates the interior function for set generic
   standardGeneric("Prior")
-}) ## sets generic for Prob function
+}) ## sets generic for Prior function
 
-setMethod("Prior", signature(theta = "numeric"), ## sets method of Prob function for input of class theta
+setMethod("Prior", signature(theta = "numeric"), ## sets method of Prior function for input of class theta
           function(theta){
             return(dnorm(theta, mean = 0, sd = 3))}
 )
@@ -243,6 +243,19 @@ EAP = function(raschObj, lower = -6, upper = 6){ ## creates function for EAP val
   return(Top/Bottom) ## returns the numerator value divided by the denominator value
 }
 
+setGeneric("EAP", function(raschObj, lower = -6, upper = 6){ ## creates the interior function for set generic
+  standardGeneric("EAP")
+}) ## sets generic for EAP function
+
+setMethod("EAP", signature(raschObj = "Rasch", lower = "numeric", upper = "numeric"), ## sets method of Like function for inputs of class Rasch and theta
+          function(raschObj, lower = -6, upper = 6){
+            Top = integrate(Num, raschObj = raschObj, lower = -6, upper = 6) ## integration function for the numerator over theta using Num 
+            Top = Top$value ## separates out just the value of the integration
+            Bottom = integrate(Den, raschObj = raschObj, lower = -6, upper = 6) ## integration function for the denominator over theta using Den
+            Bottom = Bottom$value ## separates out just the value of the integration
+            return(Top/Bottom) ## returns the numerator value divided by the denominator value
+          })
+            
 ########################################
 EAP(testRasch) ## test
 ########################################
